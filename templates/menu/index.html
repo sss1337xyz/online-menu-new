@@ -26,7 +26,7 @@
   {% for category in categorys_list %}
   <div class="col-6 col-sm-4 pb-3">
     <div class="card h-100">
-      <a href="#">
+      <a href="category/{{category.slug}}">
        <img src="{{ category.photo.url }}" class="card-img-top" alt="...">
        <div class="card-body">
           <h6 class="card-title">{{ category.name }}</h6>
