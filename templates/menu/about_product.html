@@ -27,13 +27,13 @@
     <div class="row">
       <div class="card_image">
         <div class="col-12 mx-auto my-auto">
-          <img src="https://i.imgur.com/aWGajlX.jpg" class="img-fluid rounded" alt="...">
+          <img src="{{product.photo.url}}" class="img-fluid rounded" alt="...">
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <h2>Пицца, 5г</h2>
+        <h2>{{product.name}}, {{product.grams}}г</h2>
       </div>
       <div class="row">
         <div class="col">
@@ -42,36 +42,33 @@
           <i class="fa fa-creative-commons" aria-hidden="true"></i>
         </div>
         <div class="col">
-          <p>К/Б/Ж/У</p>
+          <p>{{product.callory}}/{{product.protein}}/{{product.fats}}/{{product.carbohydrates}}</p>
         </div>
       </div>
     </div>
     <div class="row">
-      <p><small>лапша, удон, батон, лапша, удон, батон, лапша, удон, батон, лапша, удон, батон.</small></p>
+      <p><small>{{product.description}}.</small></p>
     </div>
     <div class="row mb-3">
+    {% for question in questions %}
     <div class="form-group row mx-auto">
-      <label for="size" class="col-2 col-form-label m-0 p-0">Размер</label>
+      <label for="size" class="col-2 col-form-label m-0 p-0">{{question.question}}</label>
       <select id="size" class="col-10 form-control">
-        <option>25 см</option>
-        <option>30 см</option>
-        <option>40 см</option>
+      {% for answer in question.answers_set.all %}
+        <option>{{answer.name}}</option>
+      {% endfor %}
       </select>
     </div>
-    <div class="form-group row mx-auto">
-      <label for="size2" class="col-2 col-form-label m-0 p-0">Вид</label>
-      <select id="size2" class="col-10 form-control">
-        <option>Тонкая</option>
-      </select>
-    </div>
+    {% endfor %}
   </div>
   <label class="m-0 p-0">Топпинги</label>
+  {% for topping in topping_list %}
     <div class="row mx-auto mb-1">
       <div class="row border mx-auto rounded" >
         <div class="col-6 " >
           <div class="text">
-            <p class="m-0 p-0"><small>Название топпинга</small></p>
-            <p class="m-0 p-0"><small>10 р</small></p>
+            <p class="m-0 p-0"><small>{{topping.name}}</small></p>
+            <p class="m-0 p-0"><small>{{topping.price}} р</small></p>
           </div>
         </div>
 
@@ -96,69 +93,7 @@
       </div>
 
     </div>
-    <div class="row mx-auto mb-1">
-      <div class="row border mx-auto rounded" >
-        <div class="col-6 " >
-          <div class="text">
-            <p class="m-0 p-0"><small>Название топпинга</small></p>
-            <p class="m-0 p-0"><small>10 р</small></p>
-          </div>
-        </div>
-
-        <div class="col my-auto" >
-          <div class="d-flex justify-content-end">
-            <button class="btn btn-primary px-2"
-              onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-              <i class="fas fa-minus"></i>
-            </button>
-
-
-              <input disabled id="form1" min="0" name="quantity" value="0" type="number" class="" style="border:none; width:100%; min-width: 30px; max-width: 30px;" />
-
-
-            <button class="btn btn-primary px-2"
-              onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-              <i class="fas fa-plus"></i>
-            </button>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-    <div class="row mx-auto mb-1">
-      <div class="row border mx-auto rounded" >
-        <div class="col-6 " >
-          <div class="text">
-            <p class="m-0 p-0"><small>Название топпинга</small></p>
-            <p class="m-0 p-0"><small>10 р</small></p>
-          </div>
-        </div>
-
-        <div class="col my-auto" >
-          <div class="d-flex justify-content-end">
-            <button class="btn btn-primary px-2"
-              onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-              <i class="fas fa-minus"></i>
-            </button>
-
-
-              <input disabled id="form1" min="0" name="quantity" value="0" type="number" class="" style="border:none; width:100%; min-width: 30px; max-width: 30px;" />
-
-
-            <button class="btn btn-primary px-2"
-              onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-              <i class="fas fa-plus"></i>
-            </button>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-
-
-
+    {% endfor %}
 
 
   </div>

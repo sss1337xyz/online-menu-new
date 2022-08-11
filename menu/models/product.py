@@ -22,6 +22,7 @@ class Product(BaseModel):
     old_price = models.DecimalField(max_digits=9, decimal_places=2)
     new_price = models.DecimalField(max_digits=9, decimal_places=2)
     topping_group = models.ForeignKey(ToppingGroups, on_delete=models.SET_NULL, blank=True, null=True, default=None)
+    
 
     slug = models.SlugField(max_length=200, db_index=True, unique=True)
 
