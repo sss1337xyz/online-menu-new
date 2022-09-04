@@ -1,31 +1,10 @@
-{% load static %}
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/master.css' %}">
-  </head>
-<body>
-  <nav class="navbar bg-light sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand mx-left" onClick="javascript:history.go(-1);">
-        <img src="https://img.icons8.com/ios/50/000000/back--v1.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-      </a>
-      <a class="navbar-brand mx-auto" href="#">
-        <img src="https://img.icons8.com/dusk/64/000000/restaurant-menu.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-        Online menu
-      </a>
-      <a class="navbar-brand mx-right" href="#">
-        <img src="https://img.icons8.com/ios/50/000000/buy--v1.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-      </a>
-    </div>
-  </nav>
+{% extends "menu/base.html" %}
+
+{% block content %}
+
 
   {% for product in products_list%}
-  <div class="card mb-1" style="max-width: 540px;">
+  <div class="card mb-1 mx-1" style="max-width: 540px;">
   <div class="row g-2">
     <div class="">
 
@@ -44,30 +23,39 @@
       
       <div class="row" >
         <div class="col mx-auto">
-          <p class=" text-start lh-1"><small>{{product.grams}} г</small></p>
+          <p class=" text-start lh-1"><small>{% if product.grams %}{{product.grams}} г{% endif%}</small></p>
         </div>
       </div>
       <div class="row " >
         <div class="col mx-auto" >
-          <p class="card-subtitle text-start text-decoration-line-through lh-1" ><small>{{product.old_price}} р</small></p>
+          <p class="card-subtitle text-start text-decoration-line-through lh-1" ><small>{% if product.old_price %}{{product.old_price}} р{% endif%}</small></p> 
           <p class="card-title text-start lh-1" >{{product.new_price}} р</p>
         </div>
         <div class="col" >
-          <div class="d-flex bottom-0 end-0" style="max-width: 300px">
-            <button class="btn btn-primary px-2"
-              onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+        {% if product.topping_group_id %}
+        <button class="btn btn-warning  text-nowrap" type='submit'>
+                      Выбрать 
+                    </button>
+        {% else %}
+        
+        <form method='post' id='myform' action="{% url 'cart_add' product.id %}">
+          <div class="d-flex bottom-0 end-0 align-items-center" style="max-width: 300px">
+            <button class="btn btn-warning px-2 btn-minus " data-id="{{product.id}}"
+              >
               <i class="fas fa-minus"></i>
             </button>
-
-
-              <input disabled id="form1" min="0" name="quantity" value="0" type="number" class="" style="border:none; width:100%; min-width: 35px;" />
-
-
-            <button class="btn btn-primary px-2"
-              onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+              
+              {% csrf_token %}
+              <span id='quantity__product' class="quantity__product  mx-3">0</span> 
+              <input id="form1" min="0" name="quantity" value="0" type="number" style="border:none; width:100%; min-width: 35px; display: none;" />
+              <input hidden name='update' value='True'/>
+            <button class="btn btn-warning  px-2 btn-plus" data-id="{{product.id}}"
+             >
               <i class="fas fa-plus"></i>
             </button>
           </div>
+          </form>
+        {% endif %}
         </div>
       </div>
     </div>
@@ -80,14 +68,44 @@
 
 
 
-
-
-
-
-
-
-
-</body>
-</html>
-
 <script src="https://kit.fontawesome.com/7bd2dc06d4.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+  $( ".btn-minus" ).click(function() {
+    this.parentNode.querySelector('input[type=number]').stepDown();
+    this.parentNode.querySelector('span[id=quantity__product]').textContent = this.parentNode.querySelector('input[type=number]').value;
+  });
+
+  $( ".btn-plus" ).click(function() {
+    this.parentNode.querySelector('input[type=number]').stepUp()
+    this.parentNode.querySelector('span[id=quantity__product]').textContent = this.parentNode.querySelector('input[type=number]').value;
+  });
+
+$('#myform').on('submit',function(e){
+
+  var actionUrl = $(this).attr('action')
+  $.ajax({
+            data: $(this).serialize(), // получаяем данные формы
+            url: actionUrl,
+            method: 'post',
+            dataType: 'json',
+            // если успешно, то
+            success: function (response) {
+                //alert(response);
+            },
+            // если ошибка, то
+            error: function (response) {
+                // предупредим об ошибке
+                //console.log(response.responseJSON.errors)
+                  alert("err");
+            }
+        });
+  return false;
+  });
+
+
+
+</script>
+
+{% endblock %}

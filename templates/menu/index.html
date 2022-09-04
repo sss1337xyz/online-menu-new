@@ -1,35 +1,16 @@
-{% load static %}
+{% extends "menu/base.html" %}
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/master.css' %}">
-  </head>
-<body>
-  <nav class="navbar bg-light sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand mx-auto" href="#">
-        <img src="https://img.icons8.com/dusk/64/000000/restaurant-menu.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-        Online menu
-      </a>
-      <a class="navbar-brand mx-right" href="#">
-        <img src="https://img.icons8.com/ios/50/000000/buy--v1.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-      </a>
-    </div>
-  </nav>
-<div class="container">
+{% block content %}
+
+<div class="container ">
 <div class="row">
   {% for category in categorys_list %}
   <div class="col-6 col-sm-4 pb-3">
-    <div class="card h-100">
+    <div class="card h-100" >
       <a href="category/{{category.slug}}">
        <img src="{{ category.photo.url }}" class="card-img-top" alt="...">
-       <div class="card-body">
-          <h6 class="card-title">{{ category.name }}</h6>
+       <div class="category-name">
+          <h6 class="card-title ps-2">{{ category.name }}</h6>
       </div>
       </a>
     </div>
@@ -38,5 +19,4 @@
  
 </div>
 </div>
-</body>
-</html>
+{% endblock %}

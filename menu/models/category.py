@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 
 from menu.models.base import BaseModel
-from menu.models.restauraunt import Restauraunt
+#from menu.models.restauraunt import Restauraunt
 
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
@@ -10,7 +10,7 @@ def user_directory_path(instance, filename):
 
 
 class Category(BaseModel):
-    restauraunt = models.ForeignKey(Restauraunt, on_delete=models.CASCADE)
+    #restauraunt = models.ForeignKey(Restauraunt, on_delete=models.CASCADE)
     name = models.CharField(max_length=50, db_index=True, help_text="Введите название категории")
     photo = models.ImageField(upload_to=user_directory_path, blank=True)
     slug = models.SlugField(max_length=200, db_index=True, unique=True)

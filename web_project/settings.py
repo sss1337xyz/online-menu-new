@@ -15,7 +15,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+CART_SESSION_ID = 'cart'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -27,13 +27,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    '6fc4-217-107-106-38.eu.ngrok.io'
+    '*.eu.ngrok.io',
+    '1435-84-53-229-139.eu.ngrok.io'
     ]
-
+CSRF_TRUSTED_ORIGINS = ['https://*.eu.ngrok.io']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'menu.apps.MenuConfig',
-    'nested_admin'
+    'nested_admin',
+    'cart'
 ]
 
 MIDDLEWARE = [

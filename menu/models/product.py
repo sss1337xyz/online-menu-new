@@ -11,16 +11,16 @@ def product_directory_path(instance, filename):
 
 class Product(BaseModel):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50, db_index=True, help_text="Введите название категории")
-    photo = models.ImageField(upload_to=product_directory_path, blank=True)
-    grams = models.FloatField()
-    callory = models.FloatField()
-    protein = models.FloatField()
-    fats = models.FloatField()
-    carbohydrates = models.FloatField()
-    description = models.TextField()
-    old_price = models.DecimalField(max_digits=9, decimal_places=2)
-    new_price = models.DecimalField(max_digits=9, decimal_places=2)
+    name = models.CharField(verbose_name="Название", max_length=50, db_index=True, help_text="Введите название категории")
+    photo = models.ImageField(verbose_name="Фото", upload_to=product_directory_path)
+    grams = models.IntegerField(verbose_name="Граммы", blank=True, null=True)
+    callory = models.IntegerField(verbose_name="Каллории", blank=True, null=True)
+    protein = models.IntegerField(verbose_name="Белки", blank=True, null=True)
+    fats = models.IntegerField(verbose_name="Жиры", blank=True, null=True)
+    carbohydrates = models.IntegerField(verbose_name="Углеводы", blank=True, null=True)
+    description = models.TextField(verbose_name="Описание")
+    old_price = models.DecimalField(verbose_name="Старая цена", max_digits=9, decimal_places=0, blank=True, null=True, help_text="Если старой цены нету, заполните только новую цену")
+    new_price = models.DecimalField(verbose_name="Новая цена", max_digits=9, decimal_places=0)
     topping_group = models.ForeignKey(ToppingGroups, on_delete=models.SET_NULL, blank=True, null=True, default=None)
     
 
