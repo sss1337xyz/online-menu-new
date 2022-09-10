@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1',
     '*.eu.ngrok.io',
-    '1435-84-53-229-139.eu.ngrok.io'
+    'fbd8-212-34-101-125.eu.ngrok.io'
     ]
 CSRF_TRUSTED_ORIGINS = ['https://*.eu.ngrok.io']
 

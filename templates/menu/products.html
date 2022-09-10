@@ -4,7 +4,7 @@
 
 
   {% for product in products_list%}
-  <div class="card mb-1 mx-1" style="max-width: 540px;">
+  <div class="card mb-1 mx-1" >
   <div class="row g-2">
     <div class="">
 
@@ -33,14 +33,16 @@
         </div>
         <div class="col" >
         {% if product.topping_group_id %}
-        <button class="btn btn-warning  text-nowrap" type='submit'>
+        <div class="d-flex bottom-0 end-0 align-items-center justify-content-end mx-2" style="max-width: 300px">
+        <button class="btn btn-warning " type='submit'>
                       Выбрать 
                     </button>
+        </div>
         {% else %}
         
         <form method='post' id='myform' action="{% url 'cart_add' product.id %}">
-          <div class="d-flex bottom-0 end-0 align-items-center" style="max-width: 300px">
-            <button class="btn btn-warning px-2 btn-minus " data-id="{{product.id}}"
+          <div class="d-flex bottom-0 end-0 align-items-center justify-content-end mx-2" style="max-width: 300px">
+            <button style='display: none;' class="btn btn-warning px-2 btn-minus " data-id="{{product.id}}"
               >
               <i class="fas fa-minus"></i>
             </button>
@@ -49,7 +51,7 @@
               <span id='quantity__product' class="quantity__product  mx-3">0</span> 
               <input id="form1" min="0" name="quantity" value="0" type="number" style="border:none; width:100%; min-width: 35px; display: none;" />
               <input hidden name='update' value='True'/>
-            <button class="btn btn-warning  px-2 btn-plus" data-id="{{product.id}}"
+            <button class="btn btn-warning  px-2 btn-plus " data-id="{{product.id}}"
              >
               <i class="fas fa-plus"></i>
             </button>
@@ -75,11 +77,24 @@
   $( ".btn-minus" ).click(function() {
     this.parentNode.querySelector('input[type=number]').stepDown();
     this.parentNode.querySelector('span[id=quantity__product]').textContent = this.parentNode.querySelector('input[type=number]').value;
+
+    var value = this.parentNode.querySelector('input[type=number]').value;
+      
+      if (value <= 0){
+        $(this).parent().find('.btn-minus').hide();
+      }
+
   });
 
   $( ".btn-plus" ).click(function() {
     this.parentNode.querySelector('input[type=number]').stepUp()
     this.parentNode.querySelector('span[id=quantity__product]').textContent = this.parentNode.querySelector('input[type=number]').value;
+
+    var value = this.parentNode.querySelector('input[type=number]').value;
+    if (value > 0){
+      $(this).parent().find('.btn-minus').show();
+    }
+
   });
 
 $('#myform').on('submit',function(e){
