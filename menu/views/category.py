@@ -8,6 +8,11 @@ from menu.models import Questions
 from cart.forms import CartAddProductForm
 from cart.cart import Cart
 
+from rest_framework import generics
+from menu.serializers import CategorySerializer, ProductSerializer
+from django_filters.rest_framework import DjangoFilterBackend
+
+
 # Create your views here.
 
 def index(request):
@@ -72,5 +77,15 @@ def edit_advanced(request, id, product_id):
     else:
         return JsonResponse(data={'is_taken': False})
 
+
+class CategoryApiView(generics.ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+class ProductApiView(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id', 'category__slug', 'slug']
     
     

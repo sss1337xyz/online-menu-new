@@ -26,9 +26,10 @@ SECRET_KEY = 'django-insecure-m2i6u1&vq7#e@k5dye@eyh#empoxke7mzio#i)wqh5&f9$ar*!
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    '*',
     '127.0.0.1',
     '*.eu.ngrok.io',
-    '1435-84-53-229-139.eu.ngrok.io'
+    'fbd8-212-34-101-125.eu.ngrok.io'
     ]
 CSRF_TRUSTED_ORIGINS = ['https://*.eu.ngrok.io']
 
@@ -44,7 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'menu.apps.MenuConfig',
     'nested_admin',
-    'cart'
+    'django_filters',
+    'cart',
+    'frontend.apps.FrontendConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -132,10 +136,10 @@ USE_TZ = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+print(BASE_DIR)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-   os.path.join(BASE_DIR, "static"),
+   os.path.join(BASE_DIR, "frontend/static"),
 ]
 
 # Default primary key field type
