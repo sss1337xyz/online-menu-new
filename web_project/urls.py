@@ -15,17 +15,32 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import re_path
 from django.urls import include
 from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('menu/', include('menu.urls')),
-    path('cart/', include('cart.urls')),
-    path('', RedirectView.as_view(url='/menu/', permanent=True)),
-]
+react_views_regex = r'\/|\b'.join([
 
+    # List all your react routes here
+    '/',
+    'category/',
+    'category/<slug:str>'
+
+]) + r'\/'
+
+urlpatterns = []
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += [
+    path('admin/', admin.site.urls),
+    path('admin', admin.site.urls),
+    path('api/v1/', include('menu.urls')),
+    path('', include('frontend.urls')),
+    re_path(r'^(?:.*)/?$', include('frontend.urls')),
+    #path('cart/', include('cart.urls')),
+]
+
+#urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+#urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
