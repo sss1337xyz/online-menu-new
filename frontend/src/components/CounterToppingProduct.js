@@ -33,14 +33,14 @@ const CounterToppingProduct = (props) => {
     return (
         <div className="col my-auto" >
             <div className="d-flex justify-content-end align-items-center">
-                <button type="button" className={(counter == 0) ? "btn btn-warning px-2 btn-minus hide" : "btn btn-warning px-2 btn-minus" } onClick={()=>dec()}
+                <button type="button" className={(counter == 0) ? "btn btn-warning px-2 py-1 btn-minus hide" : "btn btn-warning px-2 py-1 btn-minus" } onClick={()=>dec()}
                 >
                     <i className="fas fa-minus"></i>
                 </button>
 
                 <span id='quantity__product' className="quantity__product  mx-3">{counter}</span>
 
-                <button type="button" className="btn btn-warning px-2 btn-plus" onClick={()=>inc()}
+                <button type="button" className="btn btn-warning px-2 py-1 btn-plus" onClick={()=>inc()}
                 >
                     <i className="fas fa-plus"></i>
                 </button>

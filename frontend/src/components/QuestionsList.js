@@ -30,6 +30,8 @@ const QuestionsList = (props) => {
 
         return val
     }
+
+
     return (
         <div key={1}>
             {props.post.map((el, index) => (

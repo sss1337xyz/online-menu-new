@@ -7,6 +7,7 @@ import Products from "../pages/Products";
 import Categorys from "../pages/Categorys";
 import AboutProduct from "./AboutProduct";
 import Orders from "../pages/Orders";
+import MakeOrder from "../pages/MakeOrder";
 
 function App() {
     const [orders, setOrders] = useState({'none': [], 'with': []})
@@ -90,6 +91,7 @@ function App() {
                 <Route exact path="/category/:slug/:product_slug" element={<AboutProduct onAddWith={addOrderWith}/>} />
                 <Route exact path="/edit_order/:id_order" element={<AboutProduct orders={orders} onAddWith={editOrderWith}/>} />
                 <Route path="/orders" element={<Orders orders={orders} onAdd={addOrder} onAddWith={incOrderWith} onDelWith={decOrderWith}/>} />
+                <Route path="/make_order" element={<MakeOrder orders={orders}/>} />
             </Routes>
       </div>
 

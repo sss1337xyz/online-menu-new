@@ -35,7 +35,7 @@ const CounterProducts = (props) => {
     return (
         <div className="d-flex bottom-0 end-0 align-items-center justify-content-end mx-2"
              style={{maxWidth: '300px'}}>
-            <button className="btn btn-warning px-2 btn-minus "
+            <button className="btn btn-warning px-2 py-1 btn-minus "
                     data-id="" onClick={ () => dec()}
             >
                 <i className="fas fa-minus"></i>
@@ -45,7 +45,7 @@ const CounterProducts = (props) => {
             <input id="form1" min="0" name="quantity" value="0" type="number" className="quantity__input"
             />
             <input hidden name='update' value='True'/>
-            <button className="btn btn-warning  px-2 btn-plus " data-id="" onClick={ () => inc()}
+            <button className="btn btn-warning  px-2 py-1 btn-plus " data-id="" onClick={ () => inc()}
             >
                 <i className="fas fa-plus"></i>
             </button>

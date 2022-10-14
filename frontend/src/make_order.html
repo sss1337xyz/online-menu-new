@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/master.css">
+  </head>
+<body>
+  <nav class="navbar bg-light sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand mx-left" href="#">
+        <img src="https://img.icons8.com/ios/50/000000/back--v1.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+      </a>
+      <h1 class="text-center">Оформление заказа</h1>
+      <h1></h1>
+    </div>
+  </nav>
+
+<div class="form">
+
+    <div class="container-fluid">
+    <legend>Контактные данные*</legend>
+    <div class="mb-2">
+      <label for="inputPhone" class="form-label">Телефон</label>
+      <input type="tel" class="form-control phone" id="inputPhone">
+    </div>
+    <div class="mb-3">
+      <label for="InputName" class="form-label">Имя</label>
+      <input type="text" class="form-control" id="InputName">
+    </div>
+    <legend>Способ оплаты*</legend>
+
+    <div class="form-check form-check-inline">
+      <input class="form-check-input inputPayType" type="radio" name="PaymentType" id="PaymentType1" value="dostav">
+      <label class="form-check-label" for="PaymentType1">Доставка</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input inputPayType" type="radio" name="PaymentType" id="PaymentType2" value="samovivoz">
+      <label class="form-check-label" for="PaymentType2">Самовывоз</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input inputPayType" type="radio" name="PaymentType" id="PaymentType3" value="stolik">
+      <label class="form-check-label" for="PaymentType3">К столику</label>
+    </div>
+    </div>
+    <div  class="dostavka__form container-fluid"  style="display: none;">
+      <div class="mb-3">
+        <label for="InputName" class="form-label">Адрес доставки</label>
+        <input type="text" class="form-control" id="InputName">
+      </div>
+      <div class="row d-flex align-items-end mb-3">
+        <div class="col" >
+          <label for="InputName" class="form-label" >Подъезд</label>
+          <input type="text" class="form-control" id="InputName">
+        </div>
+        <div class="col">
+          <label for="InputName" class="form-label">Квартира/дом*</label>
+          <input type="text" class="form-control" id="InputName">
+        </div>
+        <div class="col">
+          <label for="InputName" class="form-label">Этаж</label>
+          <input type="text" class="form-control" id="InputName">
+        </div>
+      </div>
+
+    </div>
+    <div  class="samovivoz__form container-fluid"  style="display: none">
+      <div class="form-group">
+        <label for="adress_restaraun" class=" col-form-label ">Адрес ресторана</label>
+        <select id="adress_restaraun justify-content-left" class=" form-control">
+          <option>ул. Самойлова 42</option>
+          <option>ул. Ленина 34</option>
+          <option>ул. Гагарина 12</option>
+        </select>
+      </div>
+    </div>
+    <div  class="stolik__form container-fluid"  style="display: none">
+      <div class="row">
+        <div class="col">
+          <label for="InputName" class="form-label">За каким столиком вы сидите?</label>
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" id="NumberStolik">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="dostavka_none_in_restaraun container-fluid" style="display:none;">
+      <legend>Дополнительно</legend>
+      <div class="dop__options row">
+
+        <div class="row">
+
+
+        <div class="col">
+          <label for="pribors" class="form-label">Приборы</label>
+        </div>
+
+        <div class="col" >
+          <div class="d-flex justify-content-end" style="max-width: 300px">
+            <button class="btn btn-primary px-2"
+              onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+              <i class="fas fa-minus"></i>
+            </button>
+
+
+              <input disabled id="form1" min="0" name="quantity" value="0" type="number" class="" style="border:none; width:100%; min-width: 35px; max-width: 40px;" />
+
+
+            <button class="btn btn-primary px-2"
+              onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <legend>Оплата*</legend>
+      <div class="payment__form">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="BuyInput" id="BuyInput1" value="option1">
+          <label class="form-check-label" for="BuyInput1">Наличными</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="BuyInput" id="BuyInput2" value="option2">
+          <label class="form-check-label" for="BuyInput2">Оплата онлайн</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="BuyInput" id="BuyInput3" value="option3">
+          <label class="form-check-label" for="BuyInput3">Банковской картой</label>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>
+
+<script src="https://kit.fontawesome.com/7bd2dc06d4.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+<script type="text/javascript">
+  $(".phone").mask("+7(999)999-9999");
+  $('.inputPayType[name="PaymentType"]').on('change', function() {
+    if ($(this).val() == 'dostav'){
+      $('.samovivoz__form').hide();
+      $('.stolik__form').hide();
+      $('.dostavka__form').show("slow");
+      $('.dostavka_none_in_restaraun').show("slow");
+    }else if ($(this).val() == 'samovivoz') {
+      $('.dostavka__form').hide();
+      $('.stolik__form').hide();
+      $('.samovivoz__form').show("slow");
+      $('.dostavka_none_in_restaraun').show("slow");
+    }else if ($(this).val() == 'stolik') {
+      $('.dostavka_none_in_restaraun').hide();
+      $('.dostavka__form').hide();
+      $('.samovivoz__form').hide();
+      $('.stolik__form').show("slow");
+    }
+
+  });
+</script>
