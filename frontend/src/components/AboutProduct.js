@@ -4,27 +4,11 @@ import api from "../components/API/Products"
 import QuestionsList from "./QuestionsList";
 import ToppingList from "./ToppingList";
 import CounterToppingProduct from "./CounterToppingProduct";
+import Lottie from "lottie-react";
 
-/* {(infoProduct.questions.length) ? (
-                infoProduct.questions.map(el => {
-                    <div className="row mb-3">
-
-                        <div className="form-group row mx-auto">
-                            <label htmlFor="size" className="col-2 col-form-label m-0 p-0"></label>
-                            <select id="size" className="col-10 form-control">
-                                {el.answers.map(answer=>{
-                                    <option>{answer.name}</option>
-                                })}
+import loadAnimation from "../lottie/99346-loader.json"
 
 
-                            </select>
-                        </div>
-
-                    </div>
-                })) : (
-                <div></div>
-                 <QuestionsList post={infoProduct.questions}/>
-            )}*/
 
 const AboutProduct = (props) => {
     const [loading, setLoading] = useState(true)
@@ -71,7 +55,6 @@ const AboutProduct = (props) => {
             })
             })
             setQuestions(newQuestionList)
-            console.log("задали ответы")
         }else{
             console.log(infoProduct)
         }
@@ -99,7 +82,7 @@ const AboutProduct = (props) => {
     return (
         <div>
             { (loading)
-                ? <p><small>Идёт загрузка</small></p>
+                ? <Lottie animationData={loadAnimation} loop ={true} />
                 : ( <div>
                 <div className="container-fluid">
                     <div className="row">
@@ -131,37 +114,37 @@ const AboutProduct = (props) => {
                         <p><small>{infoProduct.description}</small></p>
                     </div>
 
-                    {infoProduct.questions && infoProduct.questions.length && questions &&
-                        <QuestionsList onChange={onChangeQuestion} post={infoProduct.questions} defaultVal={questions}/>
+                    {(infoProduct.questions && infoProduct.questions.length && questions)
+                        ? <QuestionsList onChange={onChangeQuestion} post={infoProduct.questions} defaultVal={questions}/>
+                        : <div></div>
                     }
 
-                    <label className="m-0 p-0">Топпинги</label>
-                    {infoProduct.topping_group && infoProduct.topping_group.toppings.length &&
 
+                    {infoProduct.topping_group && infoProduct.topping_group.toppings.length &&
+                        <label className="m-0 p-0">Топпинги</label>
+                    }
+
+                    {infoProduct.topping_group && infoProduct.topping_group.toppings.length &&
                         <ToppingList post={infoProduct.topping_group} onAdd={onAddTopping} onDel={onDelTopping}/>
                     }
 
                 </div>
-                <nav className="navbar bg-light sticky-bottom">
+                <nav className="bg-light sticky-bottom">
                 <div className="container-fluid" >
                 <div className="row justify-content-center d-flex align-items-center" >
-                <div className="col">
-                <CounterToppingProduct minSize={1} defaultValue={quantityProduct} post={{}} onAdd={onEditProduct} onDel={onEditProduct}/>
-
-                </div>
                 <div className="col ">
-                <div className="">
-                <span className="fw-bold text-center ">{summ} р</span>
+                    <CounterToppingProduct minSize={1} defaultValue={quantityProduct} post={{}} onAdd={onEditProduct} onDel={onEditProduct}/>
                 </div>
-
+                <div className="col">
+                    <span className="fw-bold text-center ">{summ} р</span>
                 </div>
                 <div className="col mx-auto ">
 
-                    <div className="">
+                    <div className="w-100">
                         {(!params.id_order)
-                            ? <button className="btn btn-warning  text-nowrap" type='button'
+                            ? <button className="btn btn-warning  text-nowrap justify-content-end" type='button'
                                       onClick={() => handleAddOrder()}>В корзину</button>
-                            : <button className="btn btn-warning  text-nowrap" type='button'
+                            : <button className="btn btn-warning  text-nowrap justify-content-end" type='button'
                                       onClick={() => handleEditOrder()}>Редактировать</button>
                         }
                     </div>

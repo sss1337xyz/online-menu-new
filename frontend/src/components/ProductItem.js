@@ -6,39 +6,50 @@ const ProductItem = (props) => {
     const params = useParams()
 
     return (
-        <div className="card mb-1 mx-1">
-            <div className="row g-2">
+        <div className="card mb-2 pb-2 mx-1 product__cart" style={{overflowX: "hidden"}}>
+            <div className="row ">
             <div className="col-4 mx-auto my-auto">
                 <Link to={`/category/${params.slug}/${props.post.slug}`}>
                     <img src={props.post.photo} className="img-fluid rounded" alt="..."/>
                 </Link>
             </div>
 
-            <div className="col">
-                <div className="">
-                    <p className="card-title text-start fs-5 lh-1">{props.post.name}</p>
-                    <p className="card-subtitle text-start lh-1"><small>{props.post.description}</small></p>
+            <div className="col d-flex flex-column justify-content-between">
+                <div className="row mb-auto">
+                    <div className="row ">
+                        <div className="col">
+                            <Link to={`/category/${params.slug}/${props.post.slug}`}>
+                                <p className="card-title  text-start fs-6 lh-1">{props.post.name}</p>
+                            </Link>
+                        </div>
+                        <div className="col card-title px-0 py-0 text-end">
+                            <span >{
+                                (props.post.grams)
+                                    ? <small> {props.post.grams} г</small>
+                                    :<small></small>
+                            }</span>
+                        </div>
+                    </div>
+                    <p className="card-subtitle text-start card-descript lh-1"><small>
+                        <Link to={`/category/${params.slug}/${props.post.slug}`}>
+                            {props.post.description}
+                        </Link>
+                        </small></p>
                 </div>
 
-                <div className="row">
-                    <div className="col mx-auto">
-                        <p className=" text-start lh-1">{
-                            (props.post.grams)
-                            ? <small> {props.post.grams} г</small>
-                            :<small></small>
-                        }</p>
-                    </div>
-                </div>
                 <div className="row ">
-                    <div className="col mx-auto">
-                        <p className="card-subtitle text-start text-decoration-line-through lh-1">
-                            {
-                                (props.post.old_price)
-                                    ? <small> {props.post.old_price} р</small>
-                                    :   <small></small>
-                            }
-                        </p>
-                        <p className="card-title text-start lh-1">{props.post.new_price} р</p>
+                    <div className="col">
+                        <div className={ (!props.post.old_price) ? "my-3" : "my-2"}>
+                            <p className="card-subtitle  text-decoration-line-through lh-1">
+                                {
+                                    props.post.old_price &&
+                                    <small> {props.post.old_price} р</small>
+
+                                }
+                            </p>
+                            <p className="card-title fs-4 lh-1">{props.post.new_price} р</p>
+                        </div>
+
                     </div>
                     <div className="col">
                         {
