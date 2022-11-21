@@ -12,7 +12,7 @@ import MakeOrder from "../pages/MakeOrder";
 function App() {
     const [orders, setOrders] = useState({'none': [], 'with': []})
 
-
+    //при добавлении в категории через +-
     function addOrder(item, quantity=1){
         if(quantity==0){
             let none = orders.none.filter(el => el.id !== item.id)
@@ -42,6 +42,7 @@ function App() {
         console.log(orders)
 
     }
+    //при добавлении внутри товара
     function addOrderWith(item){
         let newOrderWith = orders
         newOrderWith.with.push(item)
@@ -80,7 +81,7 @@ function App() {
         setOrders({...changeOrder})
     }
     useEffect(()=>{ console.log(orders) }, [orders])
-
+// <Route path="/make_order" element={<MakeOrder orders={orders}/>} />
   return (
 
       <div>
@@ -91,7 +92,7 @@ function App() {
                 <Route exact path="/category/:slug/:product_slug" element={<AboutProduct onAddWith={addOrderWith}/>} />
                 <Route exact path="/edit_order/:id_order" element={<AboutProduct orders={orders} onAddWith={editOrderWith}/>} />
                 <Route path="/orders" element={<Orders orders={orders} onAdd={addOrder} onAddWith={incOrderWith} onDelWith={decOrderWith}/>} />
-                <Route path="/make_order" element={<MakeOrder orders={orders}/>} />
+
             </Routes>
       </div>
 

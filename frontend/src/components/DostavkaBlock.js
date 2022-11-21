@@ -13,7 +13,7 @@ const DostavkaBlock = () => {
                     <input type="text" className="form-control" id="InputName"/>
                 </div>
                 <div className="col">
-                    <label htmlFor="InputName" className="form-label">Квартира/дом*</label>
+                    <label htmlFor="InputName" className="form-label">Кв./дом*</label>
                     <input type="text" className="form-control" id="InputName"/>
                 </div>
                 <div className="col">
