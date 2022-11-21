@@ -46,11 +46,6 @@ const MakeOrder = () => {
                                value="2"/>
                             <label className="form-check-label" htmlFor="PaymentType2">Самовывоз</label>
                     </div>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input inputPayType" type="radio" name="PaymentType" id="PaymentType3"
-                               value="3"/>
-                            <label className="form-check-label" htmlFor="PaymentType3">К столику</label>
-                    </div>
                 </div>
             </div>
 
@@ -62,11 +57,6 @@ const MakeOrder = () => {
                         <StolikBlock/>
                         : <div></div>
 
-            }
-
-            {(block)
-                ? <DopsAndPayBlock/>
-                : <div></div>
             }
 
 
